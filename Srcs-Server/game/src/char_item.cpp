@@ -45,7 +45,7 @@
 	}
 #endif
 
-/// 4.) in bool CHARACTER::UnequipItem(LPITEM item):
+/// 4.) in bool CHARACTER::EquipItem(LPITEM item):
 
 // before the final "return true;", add this:
 
