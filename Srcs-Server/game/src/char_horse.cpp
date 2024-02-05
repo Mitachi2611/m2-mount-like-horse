@@ -14,6 +14,48 @@
 
 // then search:
 
+		if (m_chHorse)
+		{
+			...
+		}
+
+// and replace with this:
+
+		if (m_chHorse)
+		{
+#ifdef ENABLE_MOUNT_LIKE_HORSE
+			if (GetMountVnum() != dwVnum) {
+				HorseSummon(false);
+				HorseSummon(true);
+			}
+#endif
+			return;
+		}
+
+/*Example
+void CHARACTER::HorseSummon(bool bSummon, bool bFromFar, DWORD dwVnum, const char* pPetName)
+{
+#ifdef ENABLE_MOUNT_LIKE_HORSE
+	if (const LPITEM pMountItem = GetWear(WEAR_COSTUME_MOUNT))
+		dwVnum = pMountItem->GetValue(1);
+#endif
+	if (bSummon)
+	{
+		// NOTE: If you summon and there is already a horse, it will do nothing.
+		if (m_chHorse)
+		{
+#ifdef ENABLE_MOUNT_LIKE_HORSE // try fix
+			if (GetMountVnum() != dwVnum) {
+				HorseSummon(false);
+				HorseSummon(true);
+			}
+#endif
+			return;
+		}
+*/
+
+// then search:
+
 			UpdatePacket();
 		}
 
