@@ -9,7 +9,8 @@
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (const LPITEM pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-		dwMountVnum = pMountItem->GetValue(1);
+		if (CMobVnumHelper::IsMount(dwMountVnum))
+			dwMountVnum = pMountItem->GetValue(1);
 #endif
 
 // then search:
