@@ -9,7 +9,7 @@
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (const LPITEM pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-		if (CMobVnumHelper::IsMount(dwMountVnum))
+		if (CMobVnumHelper::IsMount(pMountItem->GetValue(1)))
 			dwMountVnum = pMountItem->GetValue(1);
 #endif
 
@@ -80,7 +80,8 @@ void CHARACTER::HorseSummon(bool bSummon, bool bFromFar, DWORD dwVnum, const cha
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (const LPITEM pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-		dwVnum = pMountItem->GetValue(1);
+		if (CMobVnumHelper::IsMount(pMountItem->GetValue(1)))
+			dwVnum = pMountItem->GetValue(1);
 #endif
 
 /*Example:
