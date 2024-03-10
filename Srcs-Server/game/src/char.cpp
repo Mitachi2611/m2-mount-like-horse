@@ -45,7 +45,7 @@
 		for (int i = 0; i < ITEM_APPLY_MAX_NUM; ++i) {
 			if (pMountItem->GetProto()->aApplies[i].bType == APPLY_NONE || vnum == 0)
 				continue;
-			AddAffect(AFFECT_MOUNT_BONUS, aApplyInfo[pMountItem->GetProto()->aApplies[i].bType].bPointType, pMountItem->GetProto()->aApplies[i].lValue, AFF_NONE, INFINITE_AFFECT_DURATION, 0, true);
+			AddAffect(AFFECT_MOUNT_BONUS, aApplyInfo[pMountItem->GetProto()->aApplies[i].bType].bPointType, pMountItem->GetProto()->aApplies[i].lValue, AFF_NONE, INFINITE_AFFECT_DURATION, 0, false);
 		}
 	}
 #endif
