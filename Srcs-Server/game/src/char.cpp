@@ -40,5 +40,5 @@
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (const auto pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-		CalcBonusMount(pMountItem);
+		CalcMountBonusBySeal(pMountItem);
 #endif
