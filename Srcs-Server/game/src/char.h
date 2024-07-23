@@ -9,6 +9,7 @@ ESex GET_SEX(LPCHARACTER ch);
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	public:
 		void CheckEnterMount();
+		void CalcMountBonusBySeal(const LPITEM pMountItem);
 #endif
 
 // like:
@@ -17,6 +18,7 @@ ESex GET_SEX(LPCHARACTER ch);
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	public:
 		void CheckEnterMount();
+		void CalcMountBonusBySeal(const LPITEM pMountItem);
 #endif
 };
 

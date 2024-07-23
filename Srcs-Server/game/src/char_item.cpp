@@ -25,10 +25,8 @@
 // and add under, this:
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
-	if (item1->IsMount() && item2->IsMount() && destCell.IsEquipPosition()) {
-		HorseSummon(false);
+	if (item1->IsMount() && item2->IsMount() && destCell.IsEquipPosition())
 		HorseSummon(true);
-	}
 #endif
 
 /// 3.) Search in bool CHARACTER::UnequipItem(LPITEM item):
@@ -52,4 +50,13 @@
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (item->IsMount())
 		HorseSummon(true);
+#endif
+
+/// 5.) in CHARACTER::SetWear(BYTE bCell, LPITEM item):
+
+// at the end before the }, add:
+
+#ifdef ENABLE_MOUNT_LIKE_HORSE
+	if (item)
+		CalcBonusMount(item);
 #endif

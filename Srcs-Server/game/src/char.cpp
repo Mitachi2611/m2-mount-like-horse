@@ -39,26 +39,6 @@
 // and add under, this:
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
-	RemoveAffect(AFFECT_MOUNT_BONUS);
 	if (const auto pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-	{
-		for (int i = 0; i < ITEM_APPLY_MAX_NUM; ++i) {
-			if (pMountItem->GetProto()->aApplies[i].bType == APPLY_NONE || vnum == 0)
-				continue;
-			AddAffect(AFFECT_MOUNT_BONUS, aApplyInfo[pMountItem->GetProto()->aApplies[i].bType].bPointType, pMountItem->GetProto()->aApplies[i].lValue, AFF_NONE, INFINITE_AFFECT_DURATION, 0, false);
-		}
-	}
-#endif
-
-/// 3.) Add at the end of the file:
-
-#ifdef ENABLE_MOUNT_LIKE_HORSE
-void CHARACTER::CheckEnterMount()
-{
-	if (GetHorse()) // If is already summoned, do nothing
-		return;
-
-	if (const auto pMountItem = GetWear(WEAR_COSTUME_MOUNT))
-		HorseSummon(true, false, pMountItem->GetValue(1));
-}
+		CalcBonusMount(pMountItem);
 #endif

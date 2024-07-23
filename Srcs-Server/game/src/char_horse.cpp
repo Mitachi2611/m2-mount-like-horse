@@ -25,10 +25,8 @@
 		if (m_chHorse)
 		{
 #ifdef ENABLE_MOUNT_LIKE_HORSE
-			if (GetMountVnum() != dwVnum) {
-				HorseSummon(false);
-				HorseSummon(true);
-			}
+			if (GetMountVnum() != dwVnum)
+				m_chHorse->SetPolymorph(dwVnum);
 #endif
 			return;
 		}
@@ -45,11 +43,9 @@ void CHARACTER::HorseSummon(bool bSummon, bool bFromFar, DWORD dwVnum, const cha
 		// NOTE: If you summon and there is already a horse, it will do nothing.
 		if (m_chHorse)
 		{
-#ifdef ENABLE_MOUNT_LIKE_HORSE // try fix
-			if (GetMountVnum() != dwVnum) {
-				HorseSummon(false);
-				HorseSummon(true);
-			}
+#ifdef ENABLE_MOUNT_LIKE_HORSE
+			if (GetMountVnum() != dwVnum)
+				m_chHorse->SetPolymorph(dwVnum);
 #endif
 			return;
 		}
@@ -121,3 +117,29 @@ void CHARACTER::HorseSummon(bool bSummon, bool bFromFar, DWORD dwVnum, const cha
 #endif
 		}
 */
+
+/// 4.) Add at the end of the file:
+
+#ifdef ENABLE_MOUNT_LIKE_HORSE
+void CHARACTER::CheckEnterMount()
+{
+	if (GetHorse()) // If is already summoned, do nothing
+		return;
+
+	if (const auto pMountItem = GetWear(WEAR_COSTUME_MOUNT))
+		HorseSummon(true, false, pMountItem->GetValue(1));
+}
+
+void CHARACTER::CalcMountBonusBySeal(const LPITEM pMountItem)
+{
+	if (!GetMountVnum() || !pMountItem || !pMountItem->IsMount())
+		return;
+
+	RemoveAffect(AFFECT_MOUNT_BONUS);
+	for (int i = 0; i < ITEM_APPLY_MAX_NUM; ++i) {
+		if (pMountItem->GetProto()->aApplies[i].bType == APPLY_NONE || pMountItem->GetValue(1) == 0)
+			continue;
+		AddAffect(AFFECT_MOUNT_BONUS, aApplyInfo[pMountItem->GetProto()->aApplies[i].bType].bPointType, pMountItem->GetProto()->aApplies[i].lValue, AFF_NONE, INFINITE_AFFECT_DURATION, 0, false);
+	}
+}
+#endif
