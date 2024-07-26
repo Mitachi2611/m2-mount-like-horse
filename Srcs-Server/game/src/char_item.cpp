@@ -58,5 +58,5 @@
 
 #ifdef ENABLE_MOUNT_LIKE_HORSE
 	if (item)
-		CalcBonusMount(item);
+		CalcMountBonusBySeal(item);
 #endif
